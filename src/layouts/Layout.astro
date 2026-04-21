@@ -59,13 +59,42 @@ const { title = "Foley's Footballs", activePage = "" } = Astro.props;
 
     <!-- MAIN -->
     <div class="main">
+      <!-- MOBILE OVERLAY + DRAWER -->
+      <div class="mobile-overlay" id="mobile-overlay" onclick="closeDrawer()"></div>
+      <nav class="mobile-drawer" id="mobile-drawer">
+        <a href="/" class="sidebar-logo">
+          <div class="logo-mark">Foley's <span>Footballs</span></div>
+          <div class="logo-sub">foleysfootballs.com</div>
+        </a>
+        <div class="nav">
+          <div class="nav-group">Store</div>
+          <a href="/" class="nav-link" onclick="closeDrawer()"><span class="nav-icon">&#x2B21;</span>Home</a>
+          <a href="/store" class="nav-link" onclick="closeDrawer()"><span class="nav-icon">&#x25C9;</span>Store</a>
+          <div class="nav-group">Brand</div>
+          <a href="/process" class="nav-link" onclick="closeDrawer()"><span class="nav-icon">&#x25CE;</span>The Process</a>
+          <a href="/reviews" class="nav-link" onclick="closeDrawer()"><span class="nav-icon">&#x2605;</span>Reviews</a>
+          <a href="/story" class="nav-link" onclick="closeDrawer()"><span class="nav-icon">&#x25F7;</span>Our Story</a>
+          <div class="nav-group">More</div>
+          <a href="/tools" class="nav-link" onclick="closeDrawer()"><span class="nav-icon">&#x25C8;</span>Tools</a>
+          <a href="/contact" class="nav-link" onclick="closeDrawer()"><span class="nav-icon">&#x2709;</span>Contact</a>
+        </div>
+        <div class="sidebar-bottom">
+          <a class="ebay-btn" href="https://www.ebay.com/usr/foleysfootballs" target="_blank">&#x2197; eBay Store</a>
+        </div>
+      </nav>
+
       <header class="topbar">
-        <div class="topbar-left">
-          <span>Authentic NFL Footballs</span>
-          <span class="topbar-sep">&#xB7;</span>
-          <span>Hand-Conditioned</span>
-          <span class="topbar-sep">&#xB7;</span>
-          <span>Game-Ready</span>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <button class="mobile-nav-btn" onclick="openDrawer()" aria-label="Menu">
+            <span></span><span></span><span></span>
+          </button>
+          <div class="topbar-left">
+            <span>Authentic NFL Footballs</span>
+            <span class="topbar-sep">&#xB7;</span>
+            <span>Hand-Conditioned</span>
+            <span class="topbar-sep">&#xB7;</span>
+            <span>Game-Ready</span>
+          </div>
         </div>
         <div class="topbar-right">
           <a href="/process" class="btn-sm btn-outline">The Process</a>
@@ -79,5 +108,17 @@ const { title = "Foley's Footballs", activePage = "" } = Astro.props;
     </div>
 
   </div>
+<script>
+function openDrawer() {
+  document.getElementById('mobile-drawer').classList.add('open');
+  document.getElementById('mobile-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeDrawer() {
+  document.getElementById('mobile-drawer').classList.remove('open');
+  document.getElementById('mobile-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+</script>
 </body>
 </html>
