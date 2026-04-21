@@ -1,22 +1,5 @@
 // ═══════════════════════════════════════════════════════
 // FOLEY'S FOOTBALLS — BALL INVENTORY
-// This is the ONLY file you edit for inventory changes.
-//
-// To mark a ball sold:   change status: "active" → "sold"
-// To add a new ball:     copy a block, paste at top, fill in fields
-// To remove a ball:      delete the block entirely
-//
-// FIELDS:
-//   id          unique slug for the URL  e.g. "jets-team-issued-001"
-//   status      "active" or "sold"
-//   title       display name
-//   price       number, no $ sign
-//   tag         short label for badge
-//   tagType     "standard" | "special" | "logo" | "sold"
-//   ebayId      eBay item number (leave "" if not on eBay)
-//   stripeUrl   Stripe payment link (leave "" if not set up yet)
-//   photos      array of filenames in /public/images/{id}/
-//   notes       1-2 sentences about what makes this ball special
 // ═══════════════════════════════════════════════════════
 
 export const balls = [
@@ -29,7 +12,14 @@ export const balls = [
     tagType: "special",
     ebayId: "236513442391",
     stripeUrl: "https://buy.stripe.com/3cIeVdcA039X6BA8dY0Jq08",
-    photos: [],
+    photos: [
+      "https://i.ebayimg.com/images/g/CrsAAeSwVq9pNhjz/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/5C4AAeSwSVVpNhj1/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/9P0AAeSwrxppNhjz/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/n3YAAeSwbNFpNhj0/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/Zh8AAeSwxZxpNhj0/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/SiYAAeSwRo9pNhj0/s-l1600.jpg"
+    ],
     notes: "New York Jets team issued Wilson The Duke NFL game ball. Authenticated provenance, hand-conditioned to game-ready."
   },
   {
@@ -41,7 +31,14 @@ export const balls = [
     tagType: "special",
     ebayId: "236513742095",
     stripeUrl: "https://buy.stripe.com/28E7sL6bC8uh0dcfGq0Jq09",
-    photos: [],
+    photos: [
+      "https://i.ebayimg.com/images/g/DVEAAeSwSTlpNln7/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/-hkAAeSwmMtpNln-/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/xH4AAeSwYFlpNloB/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/CIsAAeSwE6dpNln9/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/nu4AAeSw7UNpNln7/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/XecAAeSwVktpNln~/s-l1600.jpg"
+    ],
     notes: "Official NFL 100th season commemorative Wilson The Duke game ball. Rare centennial edition, hand-conditioned."
   },
   {
@@ -53,7 +50,14 @@ export const balls = [
     tagType: "special",
     ebayId: "236513750225",
     stripeUrl: "https://buy.stripe.com/cNi14n2ZqbGt3po65Q0Jq0a",
-    photos: [],
+    photos: [
+      "https://i.ebayimg.com/images/g/eBwAAeSwKkFpNlyH/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/fyEAAeSw4yFpNlyJ/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/daoAAeSwMrlpNlyH/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/57gAAeSw30VpNlyC/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/F1UAAeSwbc5pNlyD/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/YgUAAeSwRohpNlyK/s-l1600.jpg"
+    ],
     notes: "Rare dual Rams logo stamp on a Wilson The Duke NFL game ball. Double-stamped, hand-conditioned to perfection."
   },
   {
@@ -65,7 +69,14 @@ export const balls = [
     tagType: "logo",
     ebayId: "236568479439",
     stripeUrl: "https://buy.stripe.com/cNidR943ucKxcZYgKu0Jq05",
-    photos: [],
+    photos: [
+      "https://i.ebayimg.com/images/g/gO8AAeSwxCxpXZpt/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/hHIAAeSwqU5pXZpv/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/iKIAAeSwWKZpXZpt/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/gg8AAeSwBo9pXZpm/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/hg4AAeSwaTxpXZps/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/g88AAeSwRaxpXZpu/s-l1600.jpg"
+    ],
     notes: "Wilson The Duke with official Rams logo stamp. NFL-sourced, PSA verified, hand-conditioned game-ready."
   },
   {
@@ -77,7 +88,14 @@ export const balls = [
     tagType: "logo",
     ebayId: "236568493852",
     stripeUrl: "https://buy.stripe.com/9B66oHdE4fWJ2lkcue0Jq06",
-    photos: [],
+    photos: [
+      "https://i.ebayimg.com/images/g/hq8AAeSwYO1pXZ2h/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/h5cAAeSwvXxpXZ2c/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/fgwAAeSwgbNpXZ2d/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/j28AAeSwA-FpXZ2i/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/89QAAeSwz8hpXZ2g/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/kpsAAeSwOw9pXZ2f/s-l1600.jpg"
+    ],
     notes: "Wilson The Duke with LA Rams logo stamp. Hand-conditioned with professional multi-step process."
   },
   {
@@ -89,7 +107,14 @@ export const balls = [
     tagType: "logo",
     ebayId: "236568496267",
     stripeUrl: "https://buy.stripe.com/3cI4gzbvWeSF4tsdyi0Jq07",
-    photos: [],
+    photos: [
+      "https://i.ebayimg.com/images/g/kOsAAeSwfBlpXZ59/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/lq0AAeSwZbFpXZ5-/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/luwAAeSwCaNpXZ5-/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/m78AAeSwJRlpXZ5-/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/XXkAAeSw5D5pXZ6E/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/mvsAAeSwKrNpXZ5~/s-l1600.jpg"
+    ],
     notes: "Wilson The Duke with Rams logo stamp. NFL-sourced, PSA verified, hand-conditioned."
   },
   {
@@ -101,7 +126,14 @@ export const balls = [
     tagType: "standard",
     ebayId: "236712073331",
     stripeUrl: "https://buy.stripe.com/3cIaEXgQg39X8JIcue0Jq00",
-    photos: [],
+    photos: [
+      "https://i.ebayimg.com/images/g/wsoAAeSw7SVpw~Ku/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/isMAAeSwb1Zpw~Ku/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/nWMAAeSwdbdpw~Ku/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/vj8AAeSwf7Jpw~Ku/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/uYYAAeSwERVpw~Ku/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/ifcAAeSwkcppw~Ku/s-l1600.jpg"
+    ],
     notes: "Authentic Wilson The Duke NFL game ball. Hand-conditioned through professional multi-step process. Game-ready from day one."
   },
   {
@@ -113,7 +145,14 @@ export const balls = [
     tagType: "standard",
     ebayId: "236712078029",
     stripeUrl: "https://buy.stripe.com/9B63cv43ubGt3po8dY0Jq01",
-    photos: [],
+    photos: [
+      "https://i.ebayimg.com/images/g/r88AAeSwz6ppw~OQ/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/raYAAeSwt~9pw~OQ/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/r1YAAeSwFqRpw~OQ/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/wI4AAeSw3Gdpw~OQ/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/orcAAeSwXEhpw~OQ/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/mlUAAeSw9i1pw~OQ/s-l1600.jpg"
+    ],
     notes: "Authentic Wilson The Duke NFL game ball. Hand-conditioned through professional multi-step process. Game-ready from day one."
   },
   {
@@ -125,7 +164,14 @@ export const balls = [
     tagType: "standard",
     ebayId: "236712089570",
     stripeUrl: "https://buy.stripe.com/cNiaEX8jK8uhcZY51M0Jq02",
-    photos: [],
+    photos: [
+      "https://i.ebayimg.com/images/g/naMAAeSwh-Bpw~SD/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/FyYAAeSwjC9pw~SD/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/vIwAAeSwO05pw~SE/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/wW8AAeSwJE9pw~SE/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/2~cAAeSw9A1pw~SE/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/43cAAeSwcdJpw~SE/s-l1600.jpg"
+    ],
     notes: "Authentic Wilson The Duke NFL game ball. Hand-conditioned through professional multi-step process. Game-ready from day one."
   },
   {
@@ -137,10 +183,16 @@ export const balls = [
     tagType: "standard",
     ebayId: "236712095546",
     stripeUrl: "https://buy.stripe.com/aFa5kD9nObGt8JI2TE0Jq03",
-    photos: [],
+    photos: [
+      "https://i.ebayimg.com/images/g/p08AAeSwPSxpw~U4/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/2QYAAeSwU4Jpw~U4/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/qj8AAeSwmeRpw~U4/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/1oQAAeSwjmJpw~U4/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/xY0AAeSwdJ9pw~U5/s-l1600.jpg",
+      "https://i.ebayimg.com/images/g/rG8AAeSwmGVpw~U5/s-l1600.jpg"
+    ],
     notes: "Authentic Wilson The Duke NFL game ball. Hand-conditioned through professional multi-step process. Game-ready from day one."
   },
-  // SOLD BALLS — keep these for the sold section
   {
     id: "game-ready-duke-sold-001",
     status: "sold",
@@ -159,13 +211,9 @@ export const balls = [
   }
 ];
 
-// Helper: get active balls only
 export const activeBalls = balls.filter(b => b.status === "active");
-
-// Helper: get sold balls only
 export const soldBalls = balls.filter(b => b.status === "sold");
 
-// Site stats
 export const siteStats = {
   totalSold: 128,
   feedbackCount: 207,
