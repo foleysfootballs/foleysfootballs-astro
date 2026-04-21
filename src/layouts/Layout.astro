@@ -1,0 +1,83 @@
+---
+import '../styles/global.css';
+const { title = "Foley's Footballs", activePage = "" } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{title} — Foley's Footballs</title>
+  <meta name="description" content="Authentic Wilson The Duke NFL footballs, hand-conditioned and game-ready from day one. NFL-sourced, PSA verified, shipped from Philadelphia PA."/>
+  <!-- Google Analytics — replace G-XXXXXXXX with your real ID -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXX"></script> -->
+</head>
+<body>
+  <div class="site-wrap">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <a href="/" class="sidebar-logo">
+        <div class="logo-mark">Foley's <span>Footballs</span></div>
+        <div class="logo-sub">foleysfootballs.com</div>
+      </a>
+      <nav class="nav">
+        <div class="nav-group">Store</div>
+        <a href="/" class={`nav-link ${activePage === 'home' ? 'active' : ''}`}>
+          <span class="nav-icon">&#x2B21;</span>Home
+        </a>
+        <a href="/store" class={`nav-link ${activePage === 'store' ? 'active' : ''}`}>
+          <span class="nav-icon">&#x25C9;</span>Store
+        </a>
+        <div class="nav-group">Brand</div>
+        <a href="/process" class={`nav-link ${activePage === 'process' ? 'active' : ''}`}>
+          <span class="nav-icon">&#x25CE;</span>The Process
+        </a>
+        <a href="/reviews" class={`nav-link ${activePage === 'reviews' ? 'active' : ''}`}>
+          <span class="nav-icon">&#x2605;</span>Reviews
+        </a>
+        <a href="/story" class={`nav-link ${activePage === 'story' ? 'active' : ''}`}>
+          <span class="nav-icon">&#x25F7;</span>Our Story
+        </a>
+        <div class="nav-group">More</div>
+        <a href="/tools" class={`nav-link ${activePage === 'tools' ? 'active' : ''}`}>
+          <span class="nav-icon">&#x25C8;</span>Tools
+        </a>
+        <a href="/contact" class={`nav-link ${activePage === 'contact' ? 'active' : ''}`}>
+          <span class="nav-icon">&#x2709;</span>Contact
+        </a>
+      </nav>
+      <div class="sidebar-bottom">
+        <a class="ebay-btn" href="https://www.ebay.com/usr/foleysfootballs" target="_blank">
+          &#x2197; View eBay Store
+        </a>
+        <div class="trust-pill">
+          <span class="trust-dot">&#x25CF;</span>Registered in Pennsylvania
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main">
+      <header class="topbar">
+        <div class="topbar-left">
+          <span>Authentic NFL Footballs</span>
+          <span class="topbar-sep">&#xB7;</span>
+          <span>Hand-Conditioned</span>
+          <span class="topbar-sep">&#xB7;</span>
+          <span>Game-Ready</span>
+        </div>
+        <div class="topbar-right">
+          <a href="/process" class="btn-sm btn-outline">The Process</a>
+          <a href="/store" class="btn-sm btn-gold">Shop Now</a>
+        </div>
+      </header>
+
+      <div class="content">
+        <slot />
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

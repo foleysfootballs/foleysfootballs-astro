@@ -1,0 +1,116 @@
+---
+import Layout from '../layouts/Layout.astro';
+const topic = Astro.url.searchParams.get('topic') || '';
+const item = Astro.url.searchParams.get('item') || '';
+---
+<Layout title="Contact" activePage="contact">
+
+  <div class="contact-wrap">
+
+    <div class="discount-note">
+      <span class="discount-note-icon">&#x1F4B0;</span>
+      <div class="discount-note-text">
+        <strong>eBay buyers:</strong> Message us here before purchasing on eBay.
+        eBay&#x2019;s fees drive the price up &#x2014; reach out and we&#x2019;ll work out a better deal directly.
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="form-card" id="form-wrap">
+      <form
+        id="contact-form"
+        action="https://formspree.io/f/YOUR_FORM_ID"
+        method="POST"
+      >
+        <input type="hidden" name="_subject" value="New message from foleysfootballs.com"/>
+
+        <div class="form-row-split">
+          <div>
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="First and last name" required/>
+          </div>
+          <div>
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required/>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="inquiry">What&#x2019;s this about?</label>
+          <select id="inquiry" name="inquiry" required>
+            <option value="" disabled selected={!topic}>Select a topic&#x2026;</option>
+            <option value="ebay-discount" selected={topic === 'ebay'}>eBay Ball &#x2014; I want to discuss a discount</option>
+            <option value="site-purchase" selected={topic === 'site'}>Website Ball &#x2014; I want to buy a listed ball</option>
+            <option value="custom">Custom Order &#x2014; Something specific in mind</option>
+            <option value="general">General Info / Question</option>
+          </select>
+        </div>
+
+        {item && (
+          <input type="hidden" name="item_id" value={item}/>
+        )}
+
+        <div class="form-row">
+          <label for="message">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            placeholder={item
+              ? `I'm interested in ball ${item}...`
+              : "Tell us what you're looking for, any questions, or which ball caught your eye\u2026"
+            }
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit" class="form-submit" id="submit-btn">Send Message</button>
+      </form>
+    </div>
+
+    <!-- SUCCESS STATE -->
+    <div class="success-state" id="success-state">
+      <div class="success-icon">&#x1F3C8;</div>
+      <div class="success-h">Message Sent.</div>
+      <p class="success-body">
+        Thanks for reaching out. We typically respond within a few hours &#x2014;
+        keep an eye on your inbox.<br/><br/>
+        In the meantime, feel free to browse what&#x2019;s available.
+      </p>
+      <a href="/store" style="font-family: 'Barlow Condensed', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--border2); padding: 10px 24px; text-decoration: none; display: inline-block;">
+        &#x2190; Back to Store
+      </a>
+    </div>
+
+  </div>
+
+</Layout>
+
+<script>
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Sending\u2026';
+
+    fetch(this.action, {
+      method: 'POST',
+      body: new FormData(this),
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(res => {
+      if (res.ok) {
+        document.getElementById('form-wrap').style.display = 'none';
+        document.getElementById('success-state').classList.add('visible');
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Send Message';
+        alert('Something went wrong. Please email us directly at foleysfootballs@gmail.com');
+      }
+    })
+    .catch(() => {
+      btn.disabled = false;
+      btn.textContent = 'Send Message';
+      alert('Something went wrong. Please email us directly at foleysfootballs@gmail.com');
+    });
+  });
+</script>

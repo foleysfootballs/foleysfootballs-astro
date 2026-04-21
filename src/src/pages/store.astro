@@ -1,0 +1,116 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { activeBalls, soldBalls } from '../data/balls.js';
+
+function badgeClass(tagType) {
+  const map = { special: 'badge-special', logo: 'badge-logo', standard: 'badge-standard', sold: 'badge-sold' };
+  return map[tagType] || 'badge-standard';
+}
+function photoUrl(ball) {
+  if (!ball.photos.length) return null;
+  const p = ball.photos[0];
+  return (typeof p === 'string' && p.startsWith('http')) ? p : `/images/${ball.id}/${p}`;
+}
+---
+
+<Layout title="Store" activePage="store">
+
+  <div class="section-label" style="margin-bottom: 20px;">
+    Full Catalog &#x2014; {activeBalls.length} Available
+  </div>
+
+  <!-- FILTERS -->
+  <div class="store-filters" id="filters">
+    <button class="filter-btn active" data-filter="all">All ({activeBalls.length})</button>
+    <button class="filter-btn" data-filter="special">Special Edition</button>
+    <button class="filter-btn" data-filter="logo">Team Logo</button>
+    <button class="filter-btn" data-filter="standard">Standard</button>
+  </div>
+
+  <!-- ACTIVE GRID -->
+  <div class="tile-grid" id="store-grid">
+    {activeBalls.map(ball => (
+      <a href={`/balls/${ball.id}`} class="tile" data-tag-type={ball.tagType}>
+        <div class="tile-img-wrap">
+          {photoUrl(ball)
+            ? <img src={photoUrl(ball)} alt={ball.title} loading="lazy"/>
+            : <div class="tile-no-img">&#x1F3C8;</div>
+          }
+        </div>
+        <div class="tile-type-row">
+          <span style="color: var(--blue); font-family: 'Barlow Condensed'; font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;">
+            {ball.ebayId ? 'eBay + Direct' : 'Site Only'}
+          </span>
+          <span class={`badge ${badgeClass(ball.tagType)}`}>{ball.tag}</span>
+        </div>
+        <div class="tile-body">
+          <div class="tile-title">{ball.title}</div>
+          <div class="tile-note">{ball.notes.length > 70 ? ball.notes.slice(0,70)+'...' : ball.notes}</div>
+        </div>
+        <div class="tile-footer">
+          {ball.ebayId && (
+            <span class="tile-btn tile-btn-ebay" onclick={`event.preventDefault(); window.open('https://www.ebay.com/itm/${ball.ebayId}','_blank')`}>
+              Buy on eBay &#x2197;
+            </span>
+          )}
+          {ball.stripeUrl && (
+            <span class={`tile-btn tile-btn-stripe ${!ball.ebayId ? 'style="grid-column:1/-1"' : ''}`} onclick={`event.preventDefault(); window.open('${ball.stripeUrl}','_blank')`}>
+              Buy Direct &#x2193;
+            </span>
+          )}
+        </div>
+        <div class="tile-price-row">${ball.price}</div>
+      </a>
+    ))}
+  </div>
+
+  <!-- SOLD SECTION -->
+  {soldBalls.length > 0 && (
+    <>
+      <div class="section-label" style="margin-top: 16px;">
+        Recently Sold
+        <span style="font-size: 0.65rem; color: var(--muted);">{soldBalls.length} ball{soldBalls.length !== 1 ? 's' : ''}</span>
+      </div>
+      <div class="tile-grid" style="opacity: 0.65;">
+        {soldBalls.map(ball => (
+          <div class="tile tile-sold">
+            <div class="tile-img-wrap" style="position: relative;">
+              {photoUrl(ball)
+                ? <img class="sold-img" src={photoUrl(ball)} alt="sold" loading="lazy"/>
+                : <div class="tile-no-img">&#x1F3C8;</div>
+              }
+              <div class="sold-stamp">SOLD</div>
+            </div>
+            <div class="tile-type-row">
+              <span style="color: var(--muted); font-family: 'Barlow Condensed'; font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;">{ball.tag}</span>
+              <span class="badge badge-sold">Sold</span>
+            </div>
+            <div class="tile-body">
+              <div class="tile-title" style="color: var(--muted);">{ball.title}</div>
+              <div class="tile-note">No longer available</div>
+            </div>
+            <div class="tile-price-row" style="color: var(--muted);">${ball.price}</div>
+          </div>
+        ))}
+      </div>
+    </>
+  )}
+
+</Layout>
+
+<script>
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('#store-grid .tile').forEach(tile => {
+        if (filter === 'all' || tile.dataset.tagType === filter) {
+          tile.style.display = '';
+        } else {
+          tile.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

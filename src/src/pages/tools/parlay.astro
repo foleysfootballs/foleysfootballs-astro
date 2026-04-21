@@ -1,0 +1,165 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Parlay Calculator" activePage="tools">
+
+  <a href="/tools" style="display: inline-flex; align-items: center; gap: 8px; font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); text-decoration: none; margin-bottom: 24px; transition: color 0.15s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">
+    &#x2190; Back to Tools
+  </a>
+
+  <div style="max-width: 680px;">
+
+    <div style="margin-bottom: 28px;">
+      <div style="font-family: 'Barlow Condensed', sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; display: flex; align-items: center; gap: 10px;">
+        <span style="width: 20px; height: 1px; background: var(--gold); display: inline-block;"></span>
+        Free Tool
+      </div>
+      <h1 style="font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; color: var(--cream); line-height: 0.95; margin-bottom: 10px;">Parlay Calculator</h1>
+      <p style="font-size: 0.88rem; line-height: 1.65; color: var(--muted);">Enter your bet, set your target payout, choose the number of legs. See exactly what odds you need.</p>
+    </div>
+
+    <!-- CONTROLS -->
+    <div style="background: var(--surface); border: 1px solid var(--border); padding: 28px; margin-bottom: 16px;">
+
+      <!-- BET SIZE -->
+      <div style="margin-bottom: 24px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+          <label style="font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 0;">Bet Size</label>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="color: var(--gold); font-family: 'Barlow Condensed'; font-size: 0.9rem; font-weight: 700;">$</span>
+            <input type="number" id="bet-input" value="100" min="1" max="10000" step="1" style="width: 80px; background: var(--surface2); border: 1px solid rgba(245,239,230,0.15); color: var(--gold); font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; padding: 6px 10px; text-align: center; outline: none;"/>
+          </div>
+        </div>
+        <input type="range" id="bet-slider" min="1" max="1000" value="100" style="width: 100%; accent-color: var(--gold);"/>
+        <div style="display: flex; justify-content: space-between; font-family: 'Barlow Condensed', sans-serif; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-top: 4px;">
+          <span>$1</span><span>$1,000</span>
+        </div>
+      </div>
+
+      <!-- TARGET PAYOUT -->
+      <div style="margin-bottom: 24px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+          <label style="font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 0;">Target Payout</label>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="color: var(--gold); font-family: 'Barlow Condensed'; font-size: 0.9rem; font-weight: 700;">$</span>
+            <input type="number" id="payout-input" value="1300" min="1" max="100000" step="1" style="width: 90px; background: var(--surface2); border: 1px solid rgba(245,239,230,0.15); color: var(--gold); font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; padding: 6px 10px; text-align: center; outline: none;"/>
+          </div>
+        </div>
+        <input type="range" id="payout-slider" min="100" max="10000" value="1300" style="width: 100%; accent-color: var(--gold);"/>
+        <div style="display: flex; justify-content: space-between; font-family: 'Barlow Condensed', sans-serif; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-top: 4px;">
+          <span>$100</span><span>$10,000</span>
+        </div>
+      </div>
+
+      <!-- LEGS -->
+      <div>
+        <label style="font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; display: block;">Number of Legs</label>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;" id="legs-btns">
+          {[2,3,4,5,6,7].map(n => (
+            <button
+              class="filter-btn"
+              class:list={[n === 3 ? 'active' : '']}
+              data-legs={n}
+              style={n === 3 ? 'border-color: var(--gold); color: var(--gold); background: rgba(212,168,71,0.07);' : ''}
+            >
+              {n} Legs
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div style="background: var(--surface); border: 1px solid var(--border2); border-left: 3px solid var(--gold); padding: 24px; margin-bottom: 16px;">
+      <div style="font-family: 'Barlow Condensed', sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px;">Results</div>
+
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 20px;">
+        <div style="text-align: center;">
+          <div id="res-multiplier" style="font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--gold); line-height: 1;">13.0x</div>
+          <div style="font-family: 'Barlow Condensed', sans-serif; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 3px;">Total Multiplier</div>
+        </div>
+        <div style="text-align: center;">
+          <div id="res-per-leg-dec" style="font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--gold); line-height: 1;">2.35</div>
+          <div style="font-family: 'Barlow Condensed', sans-serif; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 3px;">Per Leg (Decimal)</div>
+        </div>
+        <div style="text-align: center;">
+          <div id="res-per-leg-am" style="font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--gold); line-height: 1;">+135</div>
+          <div style="font-family: 'Barlow Condensed', sans-serif; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 3px;">Per Leg (American)</div>
+        </div>
+      </div>
+
+      <div style="border-top: 1px solid var(--border); padding-top: 16px;">
+        <div style="font-family: 'Barlow Condensed', sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px;">Required odds per leg breakdown</div>
+        <div id="legs-breakdown" style="display: flex; flex-direction: column; gap: 6px;"></div>
+      </div>
+    </div>
+
+    <p style="font-size: 0.78rem; color: var(--faint); line-height: 1.6;">
+      Note: Real sportsbooks juice parlays slightly, so actual payouts will be a hair below these numbers. Build in a small buffer. Equal-odds assumes each leg has the same probability &#x2014; adjust per your actual picks.
+    </p>
+
+  </div>
+
+</Layout>
+
+<script>
+  let bet = 100, payout = 1300, legs = 3;
+
+  const betSlider = document.getElementById('bet-slider');
+  const betInput = document.getElementById('bet-input');
+  const payoutSlider = document.getElementById('payout-slider');
+  const payoutInput = document.getElementById('payout-input');
+
+  function decimalToAmerican(dec) {
+    if (dec >= 2) return '+' + Math.round((dec - 1) * 100);
+    return Math.round(-100 / (dec - 1));
+  }
+
+  function calc() {
+    const multiplier = payout / bet;
+    const perLegDec = Math.pow(multiplier, 1 / legs);
+    const perLegAm = decimalToAmerican(perLegDec);
+
+    document.getElementById('res-multiplier').textContent = multiplier.toFixed(2) + 'x';
+    document.getElementById('res-per-leg-dec').textContent = perLegDec.toFixed(2);
+    document.getElementById('res-per-leg-am').textContent = perLegAm > 0 ? '+' + perLegAm : perLegAm;
+
+    // Breakdown
+    const bd = document.getElementById('legs-breakdown');
+    bd.innerHTML = '';
+    for (let i = 1; i <= legs; i++) {
+      const row = document.createElement('div');
+      row.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(212,168,71,0.08);';
+      const am = perLegAm > 0 ? '+' + perLegAm : perLegAm;
+      row.innerHTML = `
+        <span style="font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);">Leg ${i}</span>
+        <span style="font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;color:var(--cream);">${perLegDec.toFixed(2)} decimal &nbsp;&#xB7;&nbsp; ${am} American</span>
+      `;
+      bd.appendChild(row);
+    }
+  }
+
+  // Sync slider <-> input for bet
+  betSlider.addEventListener('input', () => { bet = parseInt(betSlider.value); betInput.value = bet; calc(); });
+  betInput.addEventListener('input', () => { bet = Math.max(1, parseInt(betInput.value) || 1); betSlider.value = Math.min(bet, 1000); calc(); });
+
+  // Sync slider <-> input for payout
+  payoutSlider.addEventListener('input', () => { payout = parseInt(payoutSlider.value); payoutInput.value = payout; calc(); });
+  payoutInput.addEventListener('input', () => { payout = Math.max(1, parseInt(payoutInput.value) || 1); payoutSlider.value = Math.min(payout, 10000); calc(); });
+
+  // Legs buttons
+  document.querySelectorAll('#legs-btns .filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#legs-btns .filter-btn').forEach(b => {
+        b.classList.remove('active');
+        b.style.cssText = '';
+      });
+      btn.classList.add('active');
+      btn.style.cssText = 'border-color: var(--gold); color: var(--gold); background: rgba(212,168,71,0.07);';
+      legs = parseInt(btn.dataset.legs);
+      calc();
+    });
+  });
+
+  calc();
+</script>
